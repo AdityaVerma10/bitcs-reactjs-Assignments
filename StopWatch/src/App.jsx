@@ -52,6 +52,7 @@ function App() {
       prevTime.mili = 0;
       return prevTime;
     });
+    setLaps([]);
   };
   const captureLap = () => {
     setLaps((prev) => [...prev, timer]);
