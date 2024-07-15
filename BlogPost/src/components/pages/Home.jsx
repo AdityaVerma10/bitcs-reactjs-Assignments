@@ -4,15 +4,18 @@ import { useLocation } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading";
 import Error from "../Error";
-
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { insertBlogs } from "../../store/blogSlice";
 export default function Home() {
-  const [blogs, setBlogs] = useState([]);
+  const blogs = useSelector((state) => state.blogs);
   const location = useLocation();
+  const dispatch = useDispatch();
   const { error, isLoading, getData } = useFetch();
   useEffect(() => {
     async function getBlogs() {
       const res = await getData("http://localhost:5713/blogs");
-      setBlogs(res);
+      dispatch(insertBlogs(res));
     }
     getBlogs();
   }, [location.key]);

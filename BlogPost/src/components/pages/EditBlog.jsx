@@ -3,12 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFetch } from "../../hooks/useFetch";
 import { useUpdate } from "../../hooks/useUpdate";
+import { useDispatch } from "react-redux";
+import { editBlog } from "../../store/blogSlice";
 function EditBlog() {
   const { Id } = useParams();
   const { getData } = useFetch();
   const [inputError, setInputError] = useState(null);
   const { updateBlog } = useUpdate();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [blog, setBlog] = useState({
     id: Id,
     title: "",
@@ -44,6 +47,7 @@ function EditBlog() {
       throw new Error("cannot updated due to network issue");
     } else {
       toast.success("Blog updated successfully!");
+      dispatch(editBlog(blog));
       navigate(-1);
     }
   };

@@ -28,7 +28,7 @@
       "id": "5",
       "title": "Node.js and Express Tutorial",
       "description": "Build a RESTful API with Node.js and Express, covering routing, middleware, and database integration. This hands-on tutorial includes authentication strategies, error handling, and deployment techniques. Discover how to build scalable backend applications with Node.js and Express, leveraging MongoDB for data storage.",
-      "authorName": "Rajeek Khan"
+      "authorName": "Rajik Khan"
     }
   ]
 }

@@ -1,16 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useDeleteBlog from "../hooks/useDelete";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { deleteBlog as storeDeleteBlog } from "../store/blogSlice";
 const BlogItem = ({ title, description, showFullDescription, id, author }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const { deleteBlog, isLoading, error } = useDeleteBlog();
 
   const handleDelete = async () => {
     const sucess = await deleteBlog(id);
     if (sucess) {
       console.log("delete Sucessfully");
+      dispatch(storeDeleteBlog(id));
       location.pathname === "/" ? navigate("/") : navigate("/home");
       toast.success("Blog deleted successfully!");
     } else {
