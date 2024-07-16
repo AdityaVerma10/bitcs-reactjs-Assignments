@@ -10,48 +10,20 @@ import Laps from "./components/Laps";
 import Lap from "./components/LapBtn.jsx";
 
 function App() {
-  const [timer, setTimer] = useState({
-    hr: 0,
-    min: 0,
-    sec: 0,
-    mili: 0,
-  });
+  const [timer, setTimer] = useState(0);
   const [startDisabled, setStartDisabled] = useState(false);
   const [laps, setLaps] = useState([]);
   const state = useRef();
   const startTimer = () => {
     state.current = setInterval(() => {
-      setTimer((prev) => {
-        let prevTime = { ...prev };
-        if (prevTime.mili === 100) {
-          prevTime.sec++;
-          prevTime.mili = 0;
-        }
-        if (prevTime.sec === 60) {
-          prevTime.min++;
-          prevTime.sec = 0;
-        }
-        if (prevTime.min === 60) {
-          prevTime.hr++;
-          prevTime.min = 0;
-        }
-        prevTime.mili++;
-        return prevTime;
-      });
+      setTimer((prev) => prev + 1);
     }, 10);
   };
   const stopTimer = () => {
     clearInterval(state.current);
   };
   const resetTimer = () => {
-    setTimer((prev) => {
-      let prevTime = { ...prev };
-      prevTime.hr = 0;
-      prevTime.min = 0;
-      prevTime.sec = 0;
-      prevTime.mili = 0;
-      return prevTime;
-    });
+    setTimer((prev) => 0);
     setLaps([]);
   };
   const captureLap = () => {
